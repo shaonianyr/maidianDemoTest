@@ -32,7 +32,7 @@ maidianDemoTest 是基于 nodejs 以及 puppeteer 开发的一个埋点自动化
 
 ```
     // 首先要准备好 nodejs && npm 环境
-    git clone 
+    git clone https://github.com/ShaoNianyr/maidianDemoTest.git
     cd maidianDemoTest
     npm install // 最好用 cnpm ( 安装 puppeteer 的时候如果卡住并用 ctrl c 取消，下次安装会默认跳过，请先卸载以后再重新安装 )
     node demo.js 
