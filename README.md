@@ -14,11 +14,10 @@ maidianDemoTest 是基于 nodejs 以及 puppeteer 开发的一个埋点自动化
 │   └── getExcel.js    // 通用的读取 excel 数据的封装
 ├── logs
 │   ├── logs
-│   │   ├── datelogFail  // 错误信息日志
-│   │   └── datelogSuc   // 成功信息日志
+│   │   ├── debuglog  // 错误信息日志
+│   │   └── infolog   // 成功信息日志
 │   └── logUtils.js      // 通用的记录 log 数据的封装
 ├── package.json         // npm 依赖包
-├── package-lock.json
 ├── picture              // README 文档截图
 ├── README.md
 ├── selector.xlsx        // 统计埋点数据的 excel 表
@@ -27,6 +26,13 @@ maidianDemoTest 是基于 nodejs 以及 puppeteer 开发的一个埋点自动化
     └── testLog.js       // 自测通用记录 log 数据封装的功能
 
 ```
+## 校验错误类型
+
+    1. 埋点没有上报
+    2. 埋点重复上报
+    3. 埋点上报信息不正确
+    4. puppeteer 执行错误或 excel 填写错误数据等其他信息
+    ...
 
 ## 快速体验
 
@@ -41,16 +47,85 @@ maidianDemoTest 是基于 nodejs 以及 puppeteer 开发的一个埋点自动化
 一切正常的话，你可以看到：
 
 ```
-[2019-11-01T15:21:08.909] [ERROR] datelogFail - Webclick 埋点 1 页面： location2
-[2019-11-01T15:21:08.910] [ERROR] datelogFail - Webclick 埋点当前名字为 【 name2 】 预期名字为 【 name1 】 断言失败
-[2019-11-01T15:21:08.942] [ERROR] datelogFail - Login 埋点 1 location1 位置没有上报
-[2019-11-01T15:21:08.942] [INFO] datelogSuc - 埋点总数： 2
-[2019-11-01T15:21:08.942] [INFO] datelogSuc - 埋点正确个数： 0
-[2019-11-01T15:21:08.942] [ERROR] datelogFail - 埋点错误个数： 2
-[2019-11-01T15:21:08.942] [ERROR] datelogFail - 错误埋点分别为： [ 'Webclick 埋点1 name1', 'Login 埋点1 location1' ]
+ConsoleMessage {
+  _type: 'log',
+  _text:
+   '{ "properties": { "$element_name": "name1", "$title": "page1" }}',
+  _args:
+   [ JSHandle {
+       _context: [ExecutionContext],
+       _client: [CDPSession],
+       _remoteObject: [Object],
+       _disposed: false } ],
+  _location:
+   { url: '__puppeteer_evaluation_script__',
+     lineNumber: 0,
+     columnNumber: 15 } }
+ConsoleMessage {
+  _type: 'log',
+  _text:
+   '{ "properties": { "$element_name": "name1", "$title": "page1" }}',
+  _args:
+   [ JSHandle {
+       _context: [ExecutionContext],
+       _client: [CDPSession],
+       _remoteObject: [Object],
+       _disposed: false } ],
+  _location:
+   { url: '__puppeteer_evaluation_script__',
+     lineNumber: 0,
+     columnNumber: 15 } }
+     
+[2019-11-08T11:18:46.938] [ERROR] datelogFail - hadOpenUrl: 1 hadClick: 1 hadSent: 1 nonRepeatReport: 0 hadNameTrue: 1  
+[2019-11-08T11:18:46.940] [ERROR] datelogFail - Webclick 埋点 1 页面： page1
+[2019-11-08T11:18:46.940] [ERROR] datelogFail - Webclick 埋点 1 name1 事件重复上报
+
+ConsoleMessage {
+  _type: 'log',
+  _text: '{ "properties": { "login_position": "location2" }}',
+  _args:
+   [ JSHandle {
+       _context: [ExecutionContext],
+       _client: [CDPSession],
+       _remoteObject: [Object],
+       _disposed: false } ],
+  _location:
+   { url: '__puppeteer_evaluation_script__',
+     lineNumber: 0,
+     columnNumber: 15 } }
+
+[2019-11-08T11:18:47.043] [ERROR] datelogFail - hadSent: 1 nonRepeatReport: 1 hadLocationTrue: 0
+[2019-11-08T11:18:47.043] [ERROR] datelogFail - Login 埋点 1 当前登录位置为 【 location2 】 预期登录位置为 【 location1 】 断言失败
+[2019-11-08T11:18:47.044] [INFO] datelogSuc - 埋点总数： 2
+[2019-11-08T11:18:47.044] [INFO] datelogSuc - 埋点正确个数： 0
+[2019-11-08T11:18:47.044] [ERROR] datelogFail - 埋点错误个数： 2
+[2019-11-08T11:18:47.045] [ERROR] datelogFail - 错误埋点分别为： [ 'Webclick 埋点1 name1', 'Login 埋点1 location1' ]
 ```
 
-这里展现了埋点的两种错误，一种是 webclick 类型的埋点触发以后，上报的名字与 excel 表格当中的不匹配，另外一种是自定义上报登陆位置的埋点并没有上报。
+这里展现了埋点的两种错误，一种是 webclick 类型的埋点重复上报，另外一种是自定义类型的埋点上报的登录位置与 excel 表格当中的不匹配。
+
+## 更多体验
+
+在 ./eventCheck/eventCheck.js 的 demo 示例代码中，可以自行选择类型体验：
+(demo 中演示的是新增的埋点重复上报校验的功能)
+
+```
+    //正常上报自测代码
+    // await page.evaluate(() => console.log('{ "properties": { "$element_name": "name1", "$title": "page1" }}'));
+    
+    //无上报自测代码
+    // await page.evaluate(() => console.log(''));
+    
+    //重复上报自测代码
+    await page.evaluate(() => console.log('{ "properties": { "$element_name": "name1", "$title": "page1" }}'));
+    await page.evaluate(() => console.log('{ "properties": { "$element_name": "name1", "$title": "page1" }}'));
+                            
+                           
+    //过滤无用的事件上报自测代码
+    // await page.evaluate(() => console.log('{ "properties": { "$element_name": "name1", "$title": "page1" }}'));
+    // await page.evaluate(() => console.log('???'));
+```
+
 
 ## 原理讲解
 
@@ -116,10 +191,13 @@ list[0] 对应 sheet1 的 webclick 事件，list[1] 对应 sheet2 的 login 事�
 hadSent 字段代表事件是否有上报， hadNameTrue 字段代表校验是否通过。由于 Demo 中并未以真实网站作为例子，所以涉及 puppeteer 的所有动作操作均以注释，通过用 page.evaluate() 来模拟上报一个事件，并打印在控制台当中作为监听对象，相关代码如下：
 
 ```
+    // 实际业务代码 (使用 puppeteer 去点击元素从而触发埋点)
     // await page.waitForSelector(sheet[i][j].selector);
     // await page.click(sheet[i][j].selector);
+
+    // demo 演示代码 (直接使用 puppeteer 伪造一个事件的上报)
     await page.evaluate(() => console.log('{ "pageLocation": "location2", "elementName": "name2" }'));    
 ```
 
-实际使用过程中应该使用注释的部分来触发元素的埋点上报，注释掉 page.evaluate() 。
+实际使用过程中应该参考实际业务代码的部分来触发元素的埋点上报，demo 演示代码仅做功能展示。
 

@@ -5,3 +5,10 @@
 [2019-11-08T11:12:00.634] [ERROR] datelogFail - Login 埋点 1 当前登录位置为 【 location2 】 预期登录位置为 【 location1 】 断言失败
 [2019-11-08T11:12:00.636] [ERROR] datelogFail - 埋点错误个数： 2
 [2019-11-08T11:12:00.637] [ERROR] datelogFail - 错误埋点分别为： [ 'Webclick 埋点1 name1', 'Login 埋点1 location1' ]
+[2019-11-08T11:18:46.938] [ERROR] datelogFail - hadOpenUrl: 1 hadClick: 1 hadSent: 1 nonRepeatReport: 0 hadNameTrue: 1
+[2019-11-08T11:18:46.940] [ERROR] datelogFail - Webclick 埋点 1 页面： page1
+[2019-11-08T11:18:46.940] [ERROR] datelogFail - Webclick 埋点 1 name1 事件重复上报
+[2019-11-08T11:18:47.043] [ERROR] datelogFail - hadSent: 1 nonRepeatReport: 1 hadLocationTrue: 0
+[2019-11-08T11:18:47.043] [ERROR] datelogFail - Login 埋点 1 当前登录位置为 【 location2 】 预期登录位置为 【 location1 】 断言失败
+[2019-11-08T11:18:47.044] [ERROR] datelogFail - 埋点错误个数： 2
+[2019-11-08T11:18:47.045] [ERROR] datelogFail - 错误埋点分别为： [ 'Webclick 埋点1 name1', 'Login 埋点1 location1' ]
