@@ -1,0 +1,3 @@
+[2019-11-08T11:09:48.538] [WARN] datelogFail - warn
+[2019-11-08T11:09:48.539] [DEBUG] datelogFail - debug
+[2019-11-08T11:09:48.539] [ERROR] datelogFail - error

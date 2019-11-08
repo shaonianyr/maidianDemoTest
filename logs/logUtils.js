@@ -11,7 +11,7 @@ log4js.configure(
     datelogSuc:
     {
         type: 'dateFile',
-        filename: './logs/logs/datelogSuc',
+        filename: './logs/logs/infolog',
         pattern: ".yyyy-MM-dd.txt",
         // alwaysIncludePattern: true,
         // maxLogSize: 10, // 无效
@@ -22,7 +22,7 @@ log4js.configure(
     datelogFail:
     {
         type: 'dateFile',
-        filename: './logs/logs/datelogFail',
+        filename: './logs/logs/debuglog',
         pattern: ".yyyy-MM-dd.txt",
         compress: true,
         daysToKeep: 2,
@@ -36,13 +36,13 @@ log4js.configure(
           appenders: ['console'],
           level: 'debug',
       },
-      datelog:
+      datelogSuc:
       {
           // 指定为上面定义的appender，如果不指定，无法写入
           appenders: ['console', 'datelogSuc'],
           level: 'debug', // 指定等级
       },
-      datelog2:
+      datelogFail:
       {
           appenders: ['console', 'datelogFail'],
           level: 'debug',

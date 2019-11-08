@@ -115,7 +115,7 @@ function eventCheck(sheet) {
                     else {
                         countFail++;
                         // debug 下使用 打印当前状态
-                        loggerSuc.info('hadOpenUrl:', hadOpenUrl,'hadClick:', hadClick,'hadSent:', hadSent,'nonRepeatReport:', nonRepeatReport,'hadNameTrue:', hadNameTrue)
+                        loggerFail.error('hadOpenUrl:', hadOpenUrl,'hadClick:', hadClick,'hadSent:', hadSent,'nonRepeatReport:', nonRepeatReport,'hadNameTrue:', hadNameTrue)
                         
                         if (!hadOpenUrl) {
                             loggerFail.error('Webclick 埋点', sheet[i][j].key, sheet[i][j].element_name, '所在的页面无法打开或 url 填写错误');
@@ -207,7 +207,7 @@ function eventCheck(sheet) {
                     else {
                         countFail++;
                         // debug 下使用 打印当前状态
-                        loggerSuc.info('hadSent:', hadSent,'nonRepeatReport:', nonRepeatReport,'hadLocationTrue:', hadLocationTrue,)
+                        loggerFail.error('hadSent:', hadSent,'nonRepeatReport:', nonRepeatReport,'hadLocationTrue:', hadLocationTrue,)
                         
                         if (!hadSent) {
                             loggerFail.error('Login 埋点', sheet[i][j].key, sheet[i][j].loginPosition, '位置没有上报');
