@@ -1,3 +1,11 @@
+# 项目已重写
+maidianDemoTest 已经重写，新项目为： [Buried-Point-Pro](https://github.com/ShaoNianyr/Buried-Point-Pro)
+
+Buried Point Pro 无需手动去设计 excel 表，也无需根据业务逻辑来写适配代码，可以直接录制复杂的业务流程为一个脚本，Buried Point Pro 执行脚本并记录数据，并动态获取定位元素的 class 属性作为埋点名字校验的预期值。更多详情见 [Buried-Point-Pro](https://github.com/ShaoNianyr/Buried-Point-Pro)
+
+以下为原项目原文。
+————————————————————————————————————————————————————————————————————————————————————
+
 # 埋点自动化测试 Demo 展示
 
 maidianDemoTest 是基于 nodejs 以及 puppeteer 开发的一个埋点自动化测试框架，可以在框架原有的基础上适配公司业务进行埋点测试。框架通过 Demo 展示如何对常见的 webclick 事件以及一些需要复杂操作触发的自定义类型的事件进行监听和校验。我们可以对已有的埋点进行回归测试，也可以对新迭代的埋点进行触发测试，你只需要做的是填好 excel 的表格，并根据 Demo 示例适配自己的业务。
