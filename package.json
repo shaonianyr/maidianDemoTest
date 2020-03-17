@@ -37,7 +37,7 @@
     "inflight": "^1.0.6",
     "inherits": "^2.0.4",
     "jsonfile": "^4.0.0",
-    "minimist": "^0.0.8",
+    "minimist": "^1.2.5",
     "minimatch": "^3.0.4",
     "mkdirp": "^0.5.1",
     "ms": "^2.1.2",
